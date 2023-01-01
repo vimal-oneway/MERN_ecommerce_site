@@ -9,11 +9,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form'
 
-// import Messager from '../components/Messager';
 import ForgotPassword from '../components/ForgotPassword';
 import Axios from "../config/axios"
-// import axios, { Axios } from 'axios';
-// import Axios from "."
 
 
 export const Login = ({ShowMessage}) => {
@@ -27,6 +24,10 @@ export const Login = ({ShowMessage}) => {
     const handleOnSubmit = async (data) => {
         const res = await Axios.loginUser(data);
         setShowMessage({message:res.message||"Login successfully", success:res.success, isOpen:true});
+        if(res.token){
+            navigate('/ ');
+            window.location.reload()
+        } 
     }
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);

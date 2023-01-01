@@ -12,7 +12,7 @@ import {useForm} from 'react-hook-form'
 import Axios from "../config/axios"
 
 
-export  const Register = () => {
+export  const Register = ({ShowMessage}) => {
     const { register, handleSubmit } = useForm();
 
     const navigate = useNavigate();
@@ -20,9 +20,13 @@ export  const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleOnSubmit = async (data) => {
-        console.log(data);
+        data = {...data,avatar:"himabos/bjfsaf"}
         const res = await Axios.registerUser(data)
-        console.log(res);
+        res.message && ShowMessage({message: res.message, success:res.success, isOpen:true})
+        if(res.token){
+            navigate('/ ');
+            window.location.reload()
+        } 
     }
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -34,7 +38,7 @@ export  const Register = () => {
     <div className='mt login-con'>
             <Box component="form" onSubmit={handleSubmit(handleOnSubmit)} noValidate  className='form-con'>
                 <FormControl  fullWidth variant="outlined">
-                    <TextField id="outlined-basic" label="Username" type={"text"} variant="outlined" {...register("username")} 
+                    <TextField id="outlined-basic" label="Username" type={"text"} variant="outlined" {...register("name")} 
                     />
                 </FormControl>
                 <div className='mb'></div>
