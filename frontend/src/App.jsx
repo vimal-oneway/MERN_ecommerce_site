@@ -15,6 +15,7 @@ import {Cart} from './pages/Cart'
 import { ProductAdd } from './pages/ProductAdd';
 import { Product } from './pages/Product';
 import Messager from './components/Messager';
+import Footer from './components/Footer';
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,12 @@ const theme = createTheme({
     secondary: {
       main: '#457B9D',
     },
+    info:{
+      main:'#6b63ff'
+    },
+    warning:{
+      main:'#ffffff'
+    }
   },
 });
 
@@ -63,6 +70,7 @@ function App() {
             <Route path='/products/:id' element={<Product userData={userData} ShowMessage={ShowMessage}/>}/>
           </Routes>
          <Messager msg={showMessage}/>
+        {location.pathname != '/login' && location.pathname != '/register' &&  <Footer/>}
       </BrowserRouter>
     </ThemeProvider>
   );

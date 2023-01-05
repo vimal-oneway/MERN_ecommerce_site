@@ -1,6 +1,5 @@
 import axios from "axios";
 axios.defaults.withCredentials=true;
-import snackBar from '../utils/snackBar'
 
 export default class Axios 
 {
@@ -51,17 +50,15 @@ export default class Axios
         return data;
     }
 
-    static async getAllProductData(){
-        const productData =  await axios.get('http://localhost:8080/api/v1/products'
+    static async getAllProductData(page){
+        const productData = await axios.get(`http://localhost:8080/api/v1/products?page=${page}`
         ,this.options)
             .then((res)=>{
-                // console.log(res.data);
                 return res.data
             })
             .catch((e)=>{
-                console.log(e.response.data,"axios fun");
                 return e.response.data
-            })
+            }) 
         return productData
     }
 
@@ -79,7 +76,6 @@ export default class Axios
 
 
     static async getProductData(category){
-        // console.log(category);
         const productData = await axios.get(`http://localhost:8080${category}`,this.options)
         .then((res)=>{
             // console.log(res.data);
@@ -91,11 +87,13 @@ export default class Axios
 
     static async productRegister(info){
         const config = {     
+            mode:'no-cors',
             headers: { 'content-type': 'multipart/form-data' }
         }
         console.log("hi",info);
         // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-        const userData = await axios.post('http://localhost:8080/product/add',info, config)
+        // const userData = await axios.post('http://localhost:8080/api/v1/product/new',info, config)
+        const userData = await axios.post('http://localhost:8080/api/v1/product/new',info, config)
         .then((res)=>{
             console.log(res.data);
             return res.data;

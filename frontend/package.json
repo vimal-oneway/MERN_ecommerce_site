@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon backend/server.js",
+    "start": "vite",
     "dev": "concurrently --kill-others \"set NODE_ENV=development&& npx nodemon backend/server.js\"  \"npm run vite\"",
     "vite": "cd frontend && vite",
     "prod": "concurrently --kill-others \"set NODE_ENV=production&& npx nodemon backend/server.js\"  \"npm run vite\"",

@@ -33,12 +33,23 @@ class APIFeatures
         return this;
     }
 
-    paginate(resPerPage)
+    async paginate(resPerPage)
     {
+        const totalCountQuery = this.query.clone();
+        totalCountQuery.skip(0);
+        const totalCount = await totalCountQuery.countDocuments();
+        const totalPage = totalCount%resPerPage === 0 ? totalCount/resPerPage : Math.floor(totalCount/resPerPage)+1
+
         const currentPage = Number(this.queryStr.page) || 1;
         const skip = resPerPage * (currentPage-1);
         this.query.limit(resPerPage).skip(skip);
-        return this;
+      
+        const products = await this.query;
+      
+        return {
+          products,
+          totalPage
+        };
     }
 }
 

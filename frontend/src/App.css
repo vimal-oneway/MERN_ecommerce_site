@@ -20,6 +20,15 @@ body{
   width: 50%;
 }
 
+.flex{
+  display: flex;
+  justify-content: center;
+}
+
+.bg{
+  background-color: #fff;
+}
+
 .mt{
   margin: 16px;
 }
@@ -33,53 +42,104 @@ body{
   margin-right:6px ;
 }
 
-@media screen and (min-width:600px)  {
-  .home-con{
-      height: 80vh;
-      width: 100%;
-      display: flex;
-      align-items: center;
-  }
+.main-con{
+  position: relative;
+}
 
-  .image{
-      width: 60%;
-  }
+ul{
+  list-style: none;
+}
 
-  .home-info{
-      width: 40%;
-  }
+/* * home page teams */
+.team-card-con{
+  margin-top: 3rem;
+}
 
-  .quotes-con{
-      width: 50%;
-  }
+.team-card{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: #1876d2 solid 1.2px;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  margin-bottom: 25px;
+  margin-top: 2.5rem;
+  padding: 25px 0 25px 0; 
+}
 
-  .login-con{
-      display: flex;
-      justify-content: center;
-      height: 85vh;
-      align-items: center;
-      flex-direction: column;
-  }
-  .form-con{
-      display: flex;
-      flex-direction: column;
-      border: #A8DADC solid 1px;
-      padding: 12px;
-      min-width: 60%;
-      max-width: 700px;
-      border-radius: 2px;
-  }
+.team-card-img{
+  width: 50%;
+  margin-top: -25%;
+  border-radius: 50%;
+  /* box-shadow: 10px 10px 15px 1px rgba(82,78,78,0.43); */
+  background-color: #A8DADC;
+}
+
+.team-card-info{
+  margin: 0 10% 0 10%;
+  text-align: center;
+}
+.team-card-info > p {
+  color: #343a40;
 }
 
 
-@media screen and (min-width: 900px)  {
-  .login-con{
+/* *ultra wide monitor */
+
+@media screen and (min-width:2500px)  {
+  /*? home page */
+
+  .home-con{
+      height: 65vh;
+      
       display: flex;
       justify-content: center;
-      height: 85vh;
       align-items: center;
-      flex-direction: column;
+
+      position: absolute;
+      left: 20%;
+      top: 20%;
+      color: #ffffff;
   }
+
+  .image{
+      width: 40%;
+      height: 100%;
+      margin-right: 10%;
+  }
+
+  .home-info{
+      width: 50%;
+      height: 100%;
+  }
+
+  .home-info > p {
+    color: #dee2e6;
+    font-size: 12px;
+  }
+
+  .home-bg{
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+    background-color: #1876d2;
+    height: 90vh;
+    width: 100%;
+  }
+
+  .quotes-con{
+      width: 60%;
+      margin-top: 12px;
+  }
+
+  .login-con{
+    display: flex;
+    justify-content: center;
+    height: 85vh;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .form-con{
       display: flex;
       flex-direction: column;
@@ -89,38 +149,302 @@ body{
       max-width: 700px;
       border-radius: 2px;
   }
+
+  /* ? team component */
+  .team-card:hover > .team-card-img{
+    box-shadow: 2px 10px 15px 0px rgba(82,78,78,0.43);
+    transition: ease-in-out .8s ;
+  }
+  .team-card:hover{
+    box-shadow: 2px 10px 15px 0px rgba(82,78,78,0.43);
+    transition: ease-in-out .5s ;
+  }
+
+/* ? footer  */
+.footer{
+  width: 100%;
+  margin: 30px 0 0 0;
+  border-radius: 64px 64px 0 0; 
+  background-color: #1876d2;
+  color: #fff;
+  padding: 0 0 10px 0;
+}
+
+.footer-card-con{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.copy-right-con
+{
+  text-align: center;
+}
+
 }
 
 
-@media screen and (min-width: 310px) and (max-width:595px) {
+/* *laptop */
+
+@media screen and (min-width:800px) and (max-width:2400px) {
+  /*? home page */
+
   .home-con{
-      width: 100%;
+      height: 65vh;
+      width: 90%;
+      
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      height: 100%;
       align-items: center;
-      margin-top: 50px;
+
+      position: absolute;
+      left: 10%;
+      top: 30%;
+      color: #ffffff;
   }
-  .quotes-con{
+
+  .image{
       width: 100%;
+      height: 100%;
+      margin-right: 10%;
+  }
+
+  .home-info{
+      width: 100%;
+      height: 100%;
+  }
+
+  .home-info > p {
+    color: #dee2e6;
+    font-size: 12px;
+  }
+
+  .home-bg{
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+    background-color: #1876d2;
+    height: 90vh;
+    width: 100%;
+  }
+
+  .quotes-con{
+      width: 60%;
+      margin-top: 16px;
+  }
+
+  .login-con{
+    display: flex;
+    justify-content: center;
+    height: 85vh;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .form-con{
+      display: flex;
+      flex-direction: column;
+      border: #A8DADC solid 1px;
+      padding: 12px;
+      min-width: 20%;
+      max-width: 700px;
+      border-radius: 2px;
+  }
+  /* ? team component */
+  .team-card:hover > .team-card-img{
+    box-shadow: 2px 10px 15px 0px rgba(82,78,78,0.43);
+  }
+  .team-card:hover{
+    box-shadow: 2px 10px 15px 0px rgba(82,78,78,0.43);
+  }
+    
+  /* ? footer  */
+        
+  .footer{
+    width: 100%;
+    margin: 30px 0 0 0;
+    border-radius: 64px 64px 0 0; 
+    background-color: #1876d2;
+    color: #fff;
+    padding: 0 0 10px 0;
+  }
+
+  .footer-card-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+  }
+
+  .copy-right-con
+  {
+    text-align: center;
+  }
+}
+
+
+/* * tab */
+
+@media screen and (min-width:600px) and (max-width:795px) {
+  /*? home page */
+
+  .home-con{
+      height: 65vh;
+      width: 80%;
       display: flex;
       justify-content: center;
-      flex-direction: column;
-      height: inherit;
-      text-align: justify;
-      margin: auto;
+      position: absolute;
+      top: 25%;
+      left: 10%;
+      align-items: center;
+      color: #ffffff;
   }
+
   .image{
-      width:100%;
+      width: 45%;
+      height: 100%;
+      margin-right: 10%;
   }
+
   .home-info{
+      width: 45%;
+      height: 100%;
+  }
+
+  .home-info > h3 {
+    font-size: 2.5rem;
+  }
+
+  .home-info > p {
+    color: #dee2e6;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+
+  .home-bg{
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+    background-color: #1876d2;
+    height: 60vh;
+    width: 100%;
+    /* position: absolute; */
+    /* z-index: -1; */
+  }
+
+  .quotes-con{
+      width: 90%;
+      margin: 16px 0 16px 0;
+  }
+
+  /* ? form */
+
+  .login-con{
+      display: flex;
+      justify-content: center;
+      height: 85vh;
+      align-items: center;
+      flex-direction: column;
+  }
+
+  .form-con{
+      display: flex;
+      flex-direction: column;
+      border: #A8DADC solid 1px;
+      padding: 12px;
+      min-width: 60%;
+      max-width: 700px;
+      border-radius: 2px;
+  }
+
+    
+  /* ? footer  */
+      
+  .footer{
+    width: 100%;
+    margin: 30px 0 0 0;
+    border-radius: 64px 64px 0 0; 
+    background-color: #1876d2;
+    color: #fff;
+    padding: 0 0 10px 0;
+  }
+
+  .footer-card-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+  }
+
+  .copy-right-con
+  {
+    text-align: center;
+  }
+  
+}
+
+/* *moblie */
+@media screen and (min-width: 310px) and (max-width:595px) {
+  /*? home page */
+
+  .home-con{
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 25px;
+    left: 10%;
+
+    color: #ffffff;
+  }
+
+  .home-bg{
+    clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+    background-color: #1876d2;
+    height: 60vh;
+    width: 100%;
+  }
+
+  .image{
+      width: 100%;
+  }
+
+  .home-info{
+      padding-top: 32px;
       width: 100%;
       display: flex;
       justify-content: center;
       flex-direction: column;
       text-align: center;
   }
+
+  .home-info > h3 {
+    font-size: 2.3rem;
+  }
+
+  .home-info > p {
+    color: #dee2e6;
+    font-size: 0.8rem;
+    margin-left: -10px;
+  }
+
+  .quotes-con{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: justify;
+      margin: 16px 0 16px 0;
+  }
+
+  /* ? form  */
+  
   .login-con{
       display: flex;
       justify-content: center;
@@ -128,6 +452,7 @@ body{
       align-items: center;
       flex-direction: column;
   }
+  
   .form-con{
       display: flex;
       flex-direction: column;
@@ -136,6 +461,30 @@ body{
       border-radius: 2px;
       width: 80%;
 
+  }
+    
+  /* ? footer  */
+  .footer{
+    width: 100%;
+    margin: 30px 0 0 0;
+    border-radius: 64px 64px 0 0; 
+    background-color: #1876d2;
+    color: #fff;
+    padding: 0 0 10px 0;
+  }
+
+  .footer-card-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+  }
+
+  .copy-right-con
+  {
+    text-align: center;
   }
 }
 

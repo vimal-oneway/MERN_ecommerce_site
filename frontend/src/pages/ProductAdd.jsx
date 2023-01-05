@@ -20,17 +20,16 @@ export  const ProductAdd = ({userData}) => {
 
     const handleOnSubmit = (data) => {
         console.log(data);
-        console.log(data.name)
-        let formData = new FormData()
+        // console.log(data.name)
+        const formData = new FormData()
         formData.append("image",data.image[0])
         formData.append("name",data.name)
+        formData.append("seller",data.seller)
         formData.append("price",data.price)
         formData.append("stock",data.stock)
         formData.append("description",data.description)
-        formData.append("cardDescription",data.cardDescription)
-        formData.append("userId",userData.userId)
         formData.append("category",data.category)
-        console.log(formData);
+        // console.log(formData.get(e));
         Axios.productRegister(formData)
         // navigate("/register/verify")
     }
@@ -43,6 +42,15 @@ export  const ProductAdd = ({userData}) => {
                         <Grid item xs={12} sm={6} md={4}>
                             <FormControl  fullWidth variant="outlined">
                                     <TextField id="outlined-basic" label="Product name" helperText={""} type={"text"} variant="outlined" {...register("name",{ 
+                                            required: true,  
+                                        })} 
+                                    />
+                                    {errors.username && <p>Please fill Product name</p>}
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <FormControl  fullWidth variant="outlined">
+                                    <TextField id="outlined-basic" label="Seller name" helperText={""} type={"text"} variant="outlined" {...register("seller",{ 
                                             required: true,  
                                         })} 
                                     />
@@ -82,21 +90,6 @@ export  const ProductAdd = ({userData}) => {
                                 {errors.description && <p>Please fill description</p>}
                             </FormControl>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
-                            <FormControl  fullWidth variant="outlined">
-                                <Typography>Card Description</Typography>
-                                <TextareaAutosize  
-                                    aria-label="Card Description textarea"
-                                    placeholder="type here max length - 150"
-                                    style={{ width: "100%" }}
-                                    minRows={8}
-                                    {...register("cardDescription",{ 
-                                        required: true,  
-                                    })} 
-                                />
-                                {errors.cardDescription && <p>Please fill card description</p>}
-                            </FormControl>
-                        </Grid>
                         <Grid item xs={12} sm={6} md={4}>
                             <FormControl sx={{  minWidth: "100%" }}>
                                 <InputLabel id="CategorySelect">Category</InputLabel>
@@ -112,11 +105,19 @@ export  const ProductAdd = ({userData}) => {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value={"robotics"}>Robotics</MenuItem>
-                                    <MenuItem value={"home automation"}>Home automation</MenuItem>
-                                    <MenuItem value={"office automation"}>Office automation</MenuItem>
-                                    <MenuItem value={"automation"}>Automation</MenuItem>
-                                    <MenuItem value={"vehicle"}>Vehicle</MenuItem>
+                                    <MenuItem value={"Robotics"}>Robotics</MenuItem>
+                                    <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                                    <MenuItem value={"Moblie phones"}>Moblie phones</MenuItem>
+                                    <MenuItem value={"Laptops"}>Laptops</MenuItem>
+                                    <MenuItem value={"Accessories"}>Accessories</MenuItem>
+                                    <MenuItem value={"Headphones"}>Headphones</MenuItem>
+                                    <MenuItem value={"Food"}>Food</MenuItem>
+                                    <MenuItem value={"Books"}>Books</MenuItem>
+                                    <MenuItem value={"Clothes/Shoes"}>Clothes/Shoes</MenuItem>
+                                    <MenuItem value={"Beauty/Health"}>Beauty/Health</MenuItem>
+                                    <MenuItem value={"Sports"}>Sports</MenuItem>
+                                    <MenuItem value={"Outdoor"}>Outdoor</MenuItem>
+                                    <MenuItem value={"Home"}>Home</MenuItem>
                                 </Select>
                                 <FormHelperText>{errors.category && "Please select the category"}</FormHelperText>
                             </FormControl>
@@ -127,7 +128,7 @@ export  const ProductAdd = ({userData}) => {
                                         required: true,  
                                     })} 
                             />
-                                {errors.image && <p>Please fill state</p>}
+                                {errors.image && <p>Please select the image</p>}
                             </FormControl>
                         </Grid>
                         <Grid item xs={12} sm={6} md={8}>

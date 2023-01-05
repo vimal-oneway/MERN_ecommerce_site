@@ -56,7 +56,7 @@ export const Navbar =({userData}) => {
               textDecoration: 'none',
             }}
           >
-            HAPPY SHOP
+            LET'S CODE
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -118,7 +118,7 @@ export const Navbar =({userData}) => {
               textAlign:'center'
             }}
           >
-            HAPPY SHOP
+            LET'S CODE
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

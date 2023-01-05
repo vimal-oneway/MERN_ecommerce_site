@@ -2,22 +2,50 @@ const Product = require('../models/productModel')
 const ErrorHandler = require('../utils/errorHandler')
 const catchAsyncError = require("../middlewares/catchAsyncError")
 const APIFeatures = require('../utils/apiFeatures')
+var multer  = require('multer')
+var sharp = require('sharp')
+var path =  require('path')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../uploads/temp')
+      },
+    filename: (req,file,cb)=>{
+        return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+})
+
+const upload = multer({
+    storage:storage
+})  
+
 
 // * send all product data -> /products
 exports.getProducts =catchAsyncError( async (req, res, next) => {
-    const resPerPage = 2;
-    const apiFeatures = new APIFeatures(Product.find(),req.query).search().filter().paginate(resPerPage);
-    const products = await apiFeatures.query;
+    const apiFeatures = new APIFeatures(Product.find(),req.query);
+    const results = await apiFeatures.search().filter().paginate(5);
     res.status(200).json({
-        success:true,
-        count:products.length,
-        products
+        success: true,
+        totalPage: results.totalPage,
+        count: results.products.length,
+        products: results.products
     })
 })
 
 // * Create new product -> /product/new
-exports.newProduct = catchAsyncError(async (req, res, next) => {
+exports.newProduct =    catchAsyncError(async (req, res, next) => {
     req.body.user = req.user.id;
+    const {name , price} = req.body;
+    const imgPath = req.file.path; 
+    const compressedImgPath = `/uploads/image/products/img_${Date.now()}.jpg`
+    const useSharpPath = `./backend${compressedImgPath}`
+    console.log(useSharpPath);
+    sharp(imgPath)
+        .resize(286, 180)
+        .toFile(useSharpPath, function (err) {
+            console.log(err);
+        });
+    req.body.images = [{image:compressedImgPath}];
     const newProductData = await Product.create(req.body);
     res.status(201).json({
         success: true,

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const errorMiddleware = require('./middlewares/error');
 const cookieParser = require('cookie-parser');
+const path =require('path')
 const cors = require('cors')
 
 app.use(cors({
@@ -10,6 +11,8 @@ app.use(cors({
     credentials:true
 }));
 
+app.use('/uploads/image/user',express.static('./uploads/image/user'))
+app.use('/uploads/image/products',express.static(path.join(__dirname, './uploads/image/products')))
 app.use(express.json());
 app.use(cookieParser());
 const products = require('./routes/product');

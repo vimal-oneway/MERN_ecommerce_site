@@ -18,15 +18,15 @@ export default function ProductCard({userData,products}) {
                   <CardMedia
                     component="img"
                     width="140"
-                    image={`http://localhost:8080/${product.productImg}`}
+                    image={`http://localhost:8080${product.images[0].image}`}
                     alt={product.name}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {product.name}
+                      {product?.name.length >=20 ?`${product?.name.slice(0,18)}...` : product?.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary"  height="50">
-                    {`${product?.description?.slice(0, 129)}...`} 
+                    {product?.description.length >= 75 ?`${product?.description?.slice(0, 75)}...` : product?.description} 
                     </Typography>
                     <div className='mb-3'></div>
                     <Divider/>
@@ -37,10 +37,10 @@ export default function ProductCard({userData,products}) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" onClick={(e)=>{Axios.addToCart(userData._id, product._id);}}>
+                  <Button size="small" color="primary" variant='outlined' onClick={(e)=>{Axios.addToCart(userData._id, product._id);}}>
                     cart
                   </Button>
-                  <Button size="small" color="primary">
+                  <Button size="small" variant='contained' color="primary">
                     buy now
                   </Button>
                 </CardActions>
