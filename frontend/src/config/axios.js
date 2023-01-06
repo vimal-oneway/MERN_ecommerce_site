@@ -50,8 +50,9 @@ export default class Axios
         return data;
     }
 
-    static async getAllProductData(page){
-        const productData = await axios.get(`http://localhost:8080/api/v1/products?page=${page}`
+    static async getAllProductData(page,priceQuery){
+        console.log(page, "price range", priceQuery);
+        const productData = await axios.get(`http://localhost:8080/api/v1/products?page=${page}${priceQuery}`
         ,this.options)
             .then((res)=>{
                 return res.data

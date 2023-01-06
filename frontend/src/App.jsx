@@ -16,6 +16,7 @@ import { ProductAdd } from './pages/ProductAdd';
 import { Product } from './pages/Product';
 import Messager from './components/Messager';
 import Footer from './components/Footer';
+import CommonDrawer  from './components/CommonDrawer';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,7 @@ const theme = createTheme({
 function App() {
   const [userData,setUserData] = useState();
   const [showMessage, setShowMessage] = useState({message:'', success:false, isOpen:false});
+  const [showDrawer, setShowDrawer] = useState({});
   
   const getUser = async () => {
     setUserData(await axios.getUser());
@@ -45,6 +47,11 @@ function App() {
   const ShowMessage = (msg) =>{
     console.log("show msg",msg);
     setShowMessage(msg)
+  }
+
+  const ShowDrawer = (handlePriceBtn, showDisplay, show) => {
+    console.log("hi", handlePriceBtn, showDisplay, show);
+    setShowDrawer({handlePriceBtn,showDisplay, show});
   }
 
   useEffect(()=>{
@@ -58,7 +65,7 @@ function App() {
           <Navbar userData={userData}/>
           <Routes>
             <Route index element={<Home userData={userData}/>}/>
-            <Route path='/products' element={<Products userData={userData} ShowMessage={ShowMessage}/>}/>
+            <Route path='/products' element={<Products userData={userData} ShowMessage={ShowMessage} ShowDrawer={ShowDrawer}/>}/>
             <Route path='/projects' element={<Products userData={userData} ShowMessage={ShowMessage}/>}/>
             <Route path='/contact' element={<Products userData={userData} ShowMessage={ShowMessage}/>}/>
             <Route path='/login' element={<Login userData={userData} ShowMessage={ShowMessage}/>}/>
@@ -70,6 +77,7 @@ function App() {
             <Route path='/products/:id' element={<Product userData={userData} ShowMessage={ShowMessage}/>}/>
           </Routes>
          <Messager msg={showMessage}/>
+         <CommonDrawer options={showDrawer}/>
         {location.pathname != '/login' && location.pathname != '/register' &&  <Footer/>}
       </BrowserRouter>
     </ThemeProvider>

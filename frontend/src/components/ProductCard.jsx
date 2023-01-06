@@ -12,7 +12,7 @@ export default function ProductCard({userData,products}) {
       {
         products?.map((product,index)=>{
           return( 
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} sm={6} md={6} key={index}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea onClick={()=>{navigate(`/products/${product._id}`)}}>
                   <CardMedia
