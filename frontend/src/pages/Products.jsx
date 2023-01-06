@@ -4,6 +4,7 @@ import Axios from "../config/axios";
 import { Container } from "@mui/system";
 import { Grid, Pagination, Typography, Button, ButtonGroup, Divider} from "@mui/material";
 import resultNotFoundSvg from "../assets/svg/no_results.svg";
+import FilterDrawer from '../components/FilterDrawer'
 
 export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
   const [products, setProducts] = useState([]);
@@ -56,14 +57,15 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
   ];
 
   return (
-    <div className="mt" id="top">
+    <div className="mt-10 mb-5" id="top">
       <Container>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={2}>
               {
               window.innerWidth < 550 
               ?
-                <Button variant="outlined" onClick={()=>{ShowDrawer(handlePriceBtn, "filter", true)}}>Filter</Button>
+                // <Button variant="outlined" onClick={()=>{ShowDrawer(handlePriceBtn, "filter", true)}}>Filter</Button>
+                <FilterDrawer/>
               :
                 <>
                   <Typography sx={{fontWeight:'bold', fontFamily:'monospace', ml:'10px'}}>PRICE RANGE</Typography>
@@ -92,7 +94,7 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
               }
             </Grid>
           </Grid>
-        <div className="flex mt">
+        <div className="flex mt-3">
          {  
             totalPage > 0 
             &&
