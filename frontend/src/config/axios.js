@@ -64,26 +64,27 @@ export default class Axios
     }
 
     static async getProductDataById(loc){
-        const productData =  await axios.get(`http://localhost:8080${loc}`
+        const productData = await axios.get(`http://localhost:8080/api/v1${loc}`
         ,this.options)
         .then((res)=>{
             return res.data
         })
         .catch((e)=>{
-            console.log(e);
+            return e.response.data
         })
-        return productData
+        return productData;
     }
 
 
     static async getProductData(category){
         const productData = await axios.get(`http://localhost:8080${category}`,this.options)
         .then((res)=>{
-            // console.log(res.data);
             return res.data
         })
-        .catch((e)=>{console.log(e);})
-        return productData?productData:{msg:"no data"}
+        .catch((e)=>{
+            return res.response.data
+        })
+        return productData
     }
 
     static async productRegister(info){

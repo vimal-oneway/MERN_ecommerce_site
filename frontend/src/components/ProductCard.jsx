@@ -14,7 +14,7 @@ export default function ProductCard({userData,products}) {
           return( 
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea onClick={()=>{navigate(`/products/${product._id}`)}}>
+                <CardActionArea onClick={()=>{navigate(`/product/${product._id}`)}}>
                   <CardMedia
                     component="img"
                     width="140"

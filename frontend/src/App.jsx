@@ -74,7 +74,7 @@ function App() {
             <Route path='/logout' element={<Logout userData={userData} ShowMessage={ShowMessage}/>}/>
             <Route path='/cart' element={<Cart userData={userData} ShowMessage={ShowMessage}/>}/>
             <Route path='/product/add' element={<ProductAdd userData={userData} ShowMessage={ShowMessage}/>}/>
-            <Route path='/products/:id' element={<Product userData={userData} ShowMessage={ShowMessage}/>}/>
+            <Route path='/product/:id' element={<Product userData={userData} ShowMessage={ShowMessage}/>}/>
           </Routes>
          <Messager msg={showMessage}/>
          <CommonDrawer options={showDrawer}/>
