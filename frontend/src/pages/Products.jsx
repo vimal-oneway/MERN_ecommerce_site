@@ -57,15 +57,15 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
   ];
 
   return (
-    <div className="mt-10 mb-5" id="top">
+    <div className="mt-10 mb-5" >
       <Container>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={2}>
               {
               window.innerWidth < 550 
               ?
                 // <Button variant="outlined" onClick={()=>{ShowDrawer(handlePriceBtn, "filter", true)}}>Filter</Button>
-                <FilterDrawer/>
+                <FilterDrawer handlePriceBtn={handlePriceBtn}/>
               :
                 <>
                   <Typography sx={{fontWeight:'bold', fontFamily:'monospace', ml:'10px'}}>PRICE RANGE</Typography>
