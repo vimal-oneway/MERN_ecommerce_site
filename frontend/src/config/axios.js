@@ -16,7 +16,7 @@ export default class Axios
     }
 
     static async getUser(){
-        const userData = await axios.post('http://localhost:8080/api/v1/getUser'
+        const userData = await axios.get('http://localhost:8080/api/v1/myprofile'
         ,this.options)
         .then((res)=>{
             return res.data.user
