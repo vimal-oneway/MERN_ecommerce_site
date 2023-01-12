@@ -1,5 +1,5 @@
 const express = require('express');
-const { getProducts, newProduct, getSingleProduct, updateProduct, deleteProduct } = require('../controllers/productController');
+const { getProducts, newProduct, getSingleProduct, updateProduct, deleteProduct, createReview } = require('../controllers/productController');
 const router = express.Router();
 const {isAuthenticatedUser, authorizeRoles} = require('../middlewares/authenticate');
 var multer  = require('multer')
@@ -33,4 +33,8 @@ router
     .put(updateProduct)
     .delete(deleteProduct);
 
+router
+    .route('/review')
+    .put(isAuthenticatedUser, createReview);
+    
 module.exports = router;
