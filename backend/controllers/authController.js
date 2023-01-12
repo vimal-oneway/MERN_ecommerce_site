@@ -4,7 +4,6 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwt");
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
-const { Tune } = require("@mui/icons-material");
 
 // * api/v1/register
 exports.registerUser = catchAsyncError(async(req, res, next) => {

@@ -5,6 +5,8 @@ import { Container } from "@mui/system";
 import { Grid, Pagination, Typography, Button, ButtonGroup, Divider} from "@mui/material";
 import resultNotFoundSvg from "../assets/svg/no_results.svg";
 import FilterDrawer from '../components/FilterDrawer'
+import { getProducts } from "../actions/productsActions";
+import {useDispatch} from 'react-redux';
 
 export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
   const [products, setProducts] = useState([]);
@@ -44,10 +46,16 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
     setPage(1);
   };
 
-  useEffect(() => {
-    getProductsData();
-    window.scrollTo(0, 0);
-  }, [page, priceQuery]);
+  // useEffect(() => {
+    
+  //   getProductsData();
+  //   window.scrollTo(0, 0);
+  // }, [page, priceQuery]);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getProducts)
+  },[])
 
   const buttons = [
     <Button key="1" onClick={()=>{handlePriceBtn(["lt"], [1000], false)}} >Under 1,000</Button>,
