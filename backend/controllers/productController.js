@@ -145,7 +145,7 @@ exports.createReview = catchAsyncError(async(req, res, next) => {
     }
 
     // * Average of products
-    product.ratings = product.reviews.reduce((acc, review) =>{
+     product.ratings = product.reviews.reduce((acc, review) =>{
         return Number(review.rating) + Number(acc);
     }, 0);
     product.ratings /= product.reviews.length;
@@ -155,4 +155,40 @@ exports.createReview = catchAsyncError(async(req, res, next) => {
     await product.save({validateBeforeSave:false});
 
     res.status(200).json({success:true});
+})
+
+// * get Reviews - /reviews?id={productId}
+exports.getReviews = catchAsyncError(async(req, res, next) => {
+    const product = await Product.findById(req.query.productId);
+
+    res.status(200).json({
+        success:true,
+        reviews: product.reviews
+    })
+})
+
+// * delete Review 
+exports.deleteReview = catchAsyncError(async(req, res, next)=>{
+    const product = await Product.findById(req.query.productId);
+
+    const reviews = product.reviews.filter(review => {
+        review._id.toString() !== req.query.id.toString() 
+    });
+
+    const numOfReviews = reviews.length;
+
+    // * Average of products
+    let ratings = reviews.reduce((acc, review) =>{
+        return Number(review.rating) + Number(acc);
+    }, 0) / reviews.length;
+
+    ratings = isNaN(ratings)?0:ratings;
+
+    await Product.findByIdAndUpdate(req.query.productId, {
+        reviews, 
+        numOfReviews, 
+        ratings
+    })
+
+    res.status(200).json({success:true})
 })
