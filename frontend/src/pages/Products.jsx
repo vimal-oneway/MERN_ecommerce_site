@@ -3,27 +3,19 @@ import ProductCard from "../components/ProductCard";
 import Axios from "../config/axios";
 import { Container } from "@mui/system";
 import { Grid, Pagination, Typography, Button, ButtonGroup, Divider} from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import resultNotFoundSvg from "../assets/svg/no_results.svg";
 import FilterDrawer from '../components/FilterDrawer'
 import { getProducts } from "../actions/productsActions";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
-  const [products, setProducts] = useState([]);
-  const [totalPage, setTotalPage] = useState(1);
-  const [count, setCount] = useState(0)
+  const {products,success, count, totalPage, loading }= useSelector((state) => {return state?.productsState})
 
   const [page, setPage] = useState(1);
   const [priceQuery, setPriceQuery] = useState("")
 
-  const getProductsData = async () => {
-    const res = await Axios.getAllProductData(page, priceQuery);
-
-    // res.message && ShowMessage({ message: res.message, success: res.success, isOpen: true });
-    setProducts(res.products);
-    setTotalPage(res.totalPage);
-    setCount(res.count);
-  };
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -46,16 +38,12 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
     setPage(1);
   };
 
-  // useEffect(() => {
-    
-  //   getProductsData();
-  //   window.scrollTo(0, 0);
-  // }, [page, priceQuery]);
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(getProducts)
-  },[])
+    getProducts(dispatch, priceQuery, page);
+    window.scrollTo(0,0);
+  },[priceQuery, page])
 
   const buttons = [
     <Button key="1" onClick={()=>{handlePriceBtn(["lt"], [1000], false)}} >Under 1,000</Button>,
@@ -67,12 +55,18 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
   return (
     <div className="mt-10 mb-5" >
       <Container>
-          <Grid container spacing={3}>
+        {loading
+            ? 
+            <Box sx={{ display: 'flex', justifyContent:'center', alignItems:'center', height:'100vh' }}>
+              <CircularProgress />
+            </Box>
+            :
+            <>
+            <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={2}>
               {
               window.innerWidth < 550 
               ?
-                // <Button variant="outlined" onClick={()=>{ShowDrawer(handlePriceBtn, "filter", true)}}>Filter</Button>
                 <FilterDrawer handlePriceBtn={handlePriceBtn}/>
               :
                 <>
@@ -90,7 +84,7 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
             <Divider orientation="vertical"   flexItem />
             <Grid item xs={12} sm={12} md={9}>
               {
-              count >0 
+                count >0 
                 ? 
                   <ProductCard products={products} userData={userData} />
                 :
@@ -98,7 +92,7 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
                     <img src={resultNotFoundSvg} alt="no_results_foung" width={"50%"}/>
                     <div className="mb"></div>
                     <Typography component={'p'} sx={{fontWeight:'500',fontSize:"2rem", fontFamily:'monospace'}}>No results found</Typography>
-                  </div>
+                  </div> 
               }
             </Grid>
           </Grid>
@@ -114,6 +108,9 @@ export const Products = ({ userData, ShowMessage, ShowDrawer }) => {
             />
           }
         </div>
+        </>
+        }
+    
       </Container>
     </div>
   );

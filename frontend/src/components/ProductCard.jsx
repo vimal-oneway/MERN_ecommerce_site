@@ -1,9 +1,10 @@
 import React from 'react'
-import { Card, CardActionArea, Button,Typography,CardActions, Grid, Divider } from '@mui/material'
+import { Card, CardActionArea, Button,Typography,CardActions,Rating, Grid, Divider } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Axios from '../config/axios'
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/system';
 
 export default function ProductCard({userData,products}) {
   const navigate = useNavigate()
@@ -30,9 +31,14 @@ export default function ProductCard({userData,products}) {
                     </Typography>
                     <div className='mb-3'></div>
                     <Divider/>
-                    <div className='mb-3'></div>
-                    <Typography variant="body3" color="text.primary"   height="50">
-                        Price: &#8377;{" "}{product.price} 
+                    <Box sx={{display:'flex',alignItems:'center', height:"25px"}} mt={1}>
+                      <Rating name="product-rating" precision={0.5}  value={Number(product?.ratings)} readOnly />
+                      <Typography variant="p" ml={1} mt={0.5} color="text.primary" > 
+                        {product?.numOfReviews}
+                      </Typography>
+                    </Box>
+                    <Typography variant="p" color="text.primary" m={1}> 
+                        Price:{" "}&#8377;{" "}{product.price} 
                     </Typography>
                   </CardContent>
                 </CardActionArea>
