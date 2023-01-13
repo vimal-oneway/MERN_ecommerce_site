@@ -2,8 +2,7 @@ import React from 'react';
 import {Container, Grid, Box, Typography, Button} from '@mui/material';
 import homePage from '../assets/gif/homePage.gif'
 import TeamCard from '../components/TeamCart'
-import { fontSize } from '@mui/system';
-
+import ProjectCard from '../components/ProjectCard';
 const teamData = [
   {
     name:'Vimal Raj',
@@ -28,6 +27,21 @@ const teamData = [
     linkedinLink: 'https://www.linkedin.com/in/vimal-raj-r-webie/',
     gitLink: 'https://github.com/vimal-oneway',
     img:'../assets/img/vimal.jpg'
+  }
+]
+
+const projectData = [
+  {
+    name:'Blog site',
+    desc:'This is a static site with good ui and ux design.'
+  },
+  {
+    name:'Movie search site',
+    desc:'This site will search a movie using movie mash api and display the results'
+  },
+  {
+    name:'Line following robot',
+    desc:`It'll follow human being like a pet. This project was so funny and by doing this project you will gain knowledge about arduino intergation with sensors, motor driver and motor etc.,.`
   }
 ]
 
@@ -105,11 +119,7 @@ export const Home = () => {
             color:'text.primary'
           }}
         >PROJECTS</Typography>
-        <Grid container spacing={2}>
-          <Grid item md={4} >sdafds</Grid>
-          <Grid item md={4} >sdafds</Grid>
-          <Grid item md={4} >sdafds</Grid>
-        </Grid>
+        <ProjectCard projectData={projectData}/>
       </Container>
     </div>
   )
