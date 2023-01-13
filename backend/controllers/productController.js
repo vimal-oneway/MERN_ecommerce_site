@@ -21,7 +21,7 @@ const upload = multer({
 
 // !todo
 // * send all product data -> /products
-exports.getProducts =catchAsyncError( async (req, res, next) => {
+exports.getProducts = catchAsyncError( async (req, res, next) => {
     const apiFeatures = new APIFeatures(Product.find(),req.query);
     const results = await apiFeatures.search().filter().paginate(5);
     res.status(200).json({
@@ -55,7 +55,7 @@ exports.newProduct =    catchAsyncError(async (req, res, next) => {
 
 // * send single product with id -> /api/v1/product/:id
 exports.getSingleProduct = catchAsyncError(async (req, res, next) => {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findById(req.params.id).populate({ path: 'reviews.user', model: 'User', select:'name email avatar'});
 
         if(!product)
         {
