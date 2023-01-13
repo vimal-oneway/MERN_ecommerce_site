@@ -1,93 +1,116 @@
-import React from "react";
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  Step,
-  Stepper,
-  StepLabel,
-  Box,
-} from "@mui/material";
-import codeTyping from "../assets/svg/code_typing2.svg";
-import avatar from "../assets/svg/male_avatar.svg";
+import React from 'react';
+import {Container, Grid, Box, Typography, Button} from '@mui/material';
+import homePage from '../assets/gif/homePage.gif'
 import TeamCard from '../components/TeamCart'
-const steps = [
-  "lets talk about our project",
-  "Bringing your ideas to life with Arduino",
-  "product at your door step",
-];
+import { fontSize } from '@mui/system';
+
+const teamData = [
+  {
+    name:'Vimal Raj',
+    role: 'Web dev',
+    instaLink:'https://www.instagram.com/itsvimal_/',
+    linkedinLink: 'https://www.linkedin.com/in/vimal-raj-r-webie/',
+    gitLink: 'https://github.com/vimal-oneway',
+    img:'../assets/img/vimal.jpg'
+  },
+  {
+    name:'Vimal Raj',
+    role: 'Web dev',
+    instaLink:'https://www.instagram.com/itsvimal_/',
+    linkedinLink: 'https://www.linkedin.com/in/vimal-raj-r-webie/',
+    gitLink: 'https://github.com/vimal-oneway',
+    img:'../assets/img/vimal.jpg'
+  },  
+  {
+    name:'Vimal Raj',
+    role: 'Web dev',
+    instaLink:'https://www.instagram.com/itsvimal_/',
+    linkedinLink: 'https://www.linkedin.com/in/vimal-raj-r-webie/',
+    gitLink: 'https://github.com/vimal-oneway',
+    img:'../assets/img/vimal.jpg'
+  }
+]
 
 export const Home = () => {
   return (
     <div>
-      <section className="main-con">
-        <div className="home-bg"></div>
-        <Container>
-          <div className="home-con">
-            <section className="image">
-              <img
-                src={codeTyping}
-                alt="ardunio_img"
-                loading="lazy"
-                width={"100%"}
-              />
-            </section>
-            <section className="home-info">
-              <Typography
-                variant="h3"
-                component={"h3"}
+      <Container className='mt'>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={6}>
+            <Box 
+              sx={{
+                display:'flex',
+                justifyContent:'center',
+                alignItems:'center',
+                height:'100%'
+              }}
+            >
+              <img src={homePage} alt='home-page-img' width={'75%'}/>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <Box 
+              sx={{
+                display:'flex',
+                justifyContent:"center", 
+                alignItems:'center',
+                height:'100%', 
+                flexDirection:'column'
+              }}
+            >
+              <Typography component={'h1'} 
                 sx={{
-                  mr: 2,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".2rem",
-                  color: "inherit",
-                  textDecoration: "none",
+                  fontFamily:'rubik',
+                  fontWeight:'700', 
+                  fontSize:'2rem', 
+                  color:'text.primary' 
                 }}
               >
-                LET'S CODE
+                Let's code
               </Typography>
-              <Typography component={"p"} sx={{ fontweight: 500 }}>
-                Empower your imagination with our team
-              </Typography>
-              <div className="quotes-con">
-                <Typography sx={{ fontFamily: "roboto", fontweight: 500 }}>
-                  {" "}
-                  &ldquo;The best brains of the nation may be found on the last
-                  benches of the classroom.&rdquo;
-                </Typography>
-                <Typography sx={{ fontweight: 500 }} textAlign={"right"}>
-                  -By Dr.A.P.J. Abdul Kalam{" "}
-                </Typography>
-              </div>
-              <div className="mb-3"></div>
-              <Button variant="contained" color="info">
-                let's talk
-              </Button>
-            </section>
-          </div>
+              <Typography component={'p'} mb={1}
+                sx={{
+                  fontFamily:'karla',
+                  fontWeight:'500', 
+                  fontSize:'1rem', 
+                  color:'text.secondary' 
+                  }}
+              >Creativity of  your idea must be true in your hand</Typography>
+              <Button variant='outlined' >Let's talk</Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+      <div className="team-card-con mt-3">
+        <Container>
+          <Typography component={'h2'} mb={2}
+            sx={{
+              fontFamily:'rubik',
+              fontSize:'2rem',
+              textAlign:'center',
+              fontWeight:'700',
+              color:'text.primary'
+            }}
+          >OUR TEAM</Typography>
+          <TeamCard teamData={teamData}/>
         </Container>
-      </section>
-      {/* our team */}
+      </div>
       <Container>
-        <Typography
-          variant="h3"
-          component={"h3"}
+        <Typography component={'h2'} mt={2} mb={2}
           sx={{
-            mr: 2,
-            fontFamily: "roboto",
-            fontWeight: 700,
-            letterSpacing: ".2rem",
-            color: "inherit",
-            textDecoration: "none",
-            textAlign: "center",
+            fontFamily:'rubik',
+            fontSize:'2rem',
+            textAlign:'center',
+            fontWeight:'700',
+            color:'text.primary'
           }}
-        >
-          OUR TEAM
-        </Typography>
-        <TeamCard/>
+        >PROJECTS</Typography>
+        <Grid container spacing={2}>
+          <Grid item md={4} >sdafds</Grid>
+          <Grid item md={4} >sdafds</Grid>
+          <Grid item md={4} >sdafds</Grid>
+        </Grid>
       </Container>
     </div>
-  );
-};
+  )
+}

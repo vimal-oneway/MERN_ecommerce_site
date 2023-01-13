@@ -1,186 +1,64 @@
 import React from 'react'
 import {
-    Button,
-    Container,
     Grid,
     Typography,
+    Box
   } from "@mui/material";
-import avatar from "../assets/svg/male_avatar.svg";
+import cardImg from '../assets/img/vimal.jpg'
 
-function TeamCart() {
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import {Link, useNavigate} from 'react-router-dom';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faInstagram, } from '@fortawesome/free-brands-svg-icons'
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
+
+import {SocialIcon} from 'react-social-icons'
+
+
+
+function TeamCart({teamData}) {
+  let navigate = useNavigate()
   return (
-    <div className="team-card-con">
-    <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="flex-start"
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 12, md: 12 }}
-          >
-            <Grid item xs={4} sm={6} md={4} key={1}>
-              <Container>
-                <div className="team-card">
-                  <section className="team-card-img">
-                    <img src={avatar} alt="avatar" width={"100%"} />
-                  </section>
-                  <section className="team-card-info">
-                    <Typography
-                      variant="h5"
-                      component={"h4"}
-                      sx={{
-                        mr: 2,
-                        fontFamily: "monospace",
-                        fontWeight: 700,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                        textAlign: "center",
-                      }}
-                    >
-                      VIMAL RAJ
-                    </Typography>
+    <Grid container spacing={2}>
+      {
+      teamData?.map((member, index) =>
+      {
+        return ( 
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <Box className='team-card'>
+            <img className='team-card-img' src={cardImg} alt="dev-photo" width={'100%'} height={'100%'} />
+            <Box className={'card-text-con'}>
 
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        fontFamily: "monospace",
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                      Web dev
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Repellendus sint sunt, blanditiis perferendis incidunt at!
-                      Aliquid cupiditate soluta earum assumenda provident, esse
-                      beatae atque eos, ex voluptas dolorum quae qui!
-                    </Typography>
-                    <div className="mb"></div>
-                    <Button variant="contained">connect</Button>
-                  </section>
-                </div>
-              </Container>
-            </Grid>
-            <Grid item xs={4} sm={6} md={4} key={2}>
-              <Container>
-                <div className="team-card">
-                  <section className="team-card-img">
-                    <img src={avatar} alt="avatar" width={"100%"} />
-                  </section>
-                  <section className="team-card-info">
-                    <Typography
-                      variant="h5"
-                      component={"h4"}
-                      sx={{
-                        mr: 2,
-                        fontFamily: "monospace",
-                        fontWeight: 700,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                        textAlign: "center",
-                      }}
-                    >
-                      VIMAL
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        fontFamily: "monospace",
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                      UI/UX
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Repellendus sint sunt, blanditiis perferendis incidunt at!
-                      Aliquid cupiditate soluta earum assumenda provident, esse
-                      beatae atque eos, ex voluptas dolorum quae qui!
-                    </Typography>
-                    <div className="mb"></div>
-                    <Button variant="contained">connect</Button>
-                  </section>
-                </div>
-              </Container>
-            </Grid>
-            <Grid item xs={4} sm={6} md={4} key={3}>
-              <Container>
-                <div className="team-card">
-                  <section className="team-card-img">
-                    <img src={avatar} alt="avatar" width={"100%"} />
-                  </section>
-                  <section className="team-card-info">
-                    <Typography
-                      variant="h5"
-                      component={"h4"}
-                      sx={{
-                        mr: 2,
-                        fontFamily: "monospace",
-                        fontWeight: 700,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                        textAlign: "center",
-                      }}
-                    >
-                      DEVIL
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        fontFamily: "monospace",
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                     Content writer
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontWeight: 500,
-                        letterSpacing: ".1rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                      }}
-                    >
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Repellendus sint sunt, blanditiis perferendis incidunt at!
-                      Aliquid cupiditate soluta earum assumenda provident, esse
-                      beatae atque eos, ex voluptas dolorum quae qui!
-                    </Typography>
-                    <div className="mb"></div>
-                    <Button variant="contained">connect</Button>
-                  </section>
-                </div>
-              </Container>
-            </Grid>
-          </Grid>
-        </div>
+                <Typography component={'h3'} mt={1}
+                  sx={{
+                    fontFamily:'rubik',
+                    fontWeight:'700',
+                    fontSize:'1.7rem',
+                    color:'text.primary'
+                  }}
+                >{member.name}</Typography>
+                <Typography
+                  sx={{
+                    fontFamily:'karla',
+                    fontWeight:'500',
+                    fontSize:'1.2rem',
+                    color:'text.secondary'
+                  }}
+                >{member.role}</Typography>
+                <Box >
+                    <SocialIcon  className='card-icon' url={member.instaLink} style={{marginRight:'8px'}}/> 
+                    <SocialIcon  className='card-icon' url={member.linkedinLink} style={{marginRight:'8px'}}/> 
+                    <SocialIcon  className='card-icon' url={member.gitLink} style={{fontSize:'16px'}}/> 
+                </Box>
+            </Box>
+          </Box>
+        </Grid>
+      )
+      })
+      }
+    </Grid>
   )
 }
 
