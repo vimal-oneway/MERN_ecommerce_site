@@ -14,8 +14,7 @@ const cartSlice = createSlice({
         cartSuccess(state, action){
             return {
                 loading: false,
-                product: action.payload.product,
-                success: action.payload.success,
+                cart: action.payload,
             }
         },
         cartFail(state, action){
@@ -27,7 +26,7 @@ const cartSlice = createSlice({
     }
 });
 
-const {actions, reducer} = productSlice;
+const {actions, reducer} = productSlice; 
 
 export const {productFail, productRequest, productSuccess} = actions;
 

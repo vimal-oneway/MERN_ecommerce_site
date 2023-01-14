@@ -164,13 +164,42 @@ exports.updateProfile = catchAsyncError(async(req, res, next) => {
         .json({success:true, message: 'Your profile updated successfully', user});
 })
 
+// * get user cart 
+exports.getUserCart = catchAsyncError(async(req, res, next) => {
+    const user = await User.findById(req.user._id).populate({ path: 'cart.product', model: 'Product', select:'name price description ratings images seller numOfReviews'})
+ 
+    if(!user){
+        return next(new ErrorHandler('Your cart is empty',404));
+    }
+
+    res.status(200).json({cart:user.cart})
+})
+
+// * add to cart 
+exports.addToCart = catchAsyncError(async(req, res, next) => {
+    const {productId, quantity} = req.body;
+    const user =  await User.findById(req.user._id);
+    user.cart.push({product:productId, quantity:quantity||1});
+    user.save();
+    res.status(200).json({user, success:true, message:'Product was added successfully'});
+})
+
+// * delete product in cart
+exports.deleteCart = catchAsyncError(async (req, res, next) => {
+    const {productId} = req.body;
+    const user = await User.findById(req.user._id).select('cart');
+    user.cart = user.cart.filter(obj => obj.product.toString() !== productId);
+    await user.save()
+    res.status(200).json({user})
+})
+
 // * Admin: Get All users 
 exports.getAllUsers = catchAsyncError(async(req, res, next) => {
     const users = await User.find();
     res
         .status(200)
         .json({success:true, users})
-})
+}) 
 
 // * Admin: Get Specific User - get /admin/user/:id
 exports.getUserAdmin = catchAsyncError(async(req, res, next) => {
@@ -213,3 +242,4 @@ exports.deleteUser = catchAsyncError(async(req, res, next) => {
     await user.remove();
     res.status(200).json({success:true})
 })
+

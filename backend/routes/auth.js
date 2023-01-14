@@ -13,7 +13,10 @@ const
         getAllUsers,
         getUserAdmin,
         updateUser,
-        deleteUser
+        deleteUser,
+        getUserCart,
+        addToCart,
+        deleteCart
     } = require('../controllers/authController');
 
 const { isAuthenticatedUser,authorizeRoles } = require('../middlewares/authenticate')
@@ -31,6 +34,12 @@ router.route('/password/reset/:token').post(resetPassword);
 
 router.route('/password/change').put(isAuthenticatedUser, changePassword);
 router.route('/update').put(isAuthenticatedUser, updateProfile);
+
+router
+    .route('/cart')
+    .get(isAuthenticatedUser, getUserCart)
+    .put(isAuthenticatedUser, addToCart)
+    .delete(isAuthenticatedUser, deleteCart);
 
 // * admin routes
 router.route('/admin/users').get( isAuthenticatedUser, authorizeRoles('admin'), getAllUsers );
