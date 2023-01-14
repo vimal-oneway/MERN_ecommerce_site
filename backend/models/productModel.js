@@ -86,6 +86,10 @@ const productSchema = new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now()
+    },
+    division:{
+        type:String,
+        required:true
     }
 })
 

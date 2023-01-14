@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import Axios from '../config/axios'
+import React, { useEffect } from 'react'
 import { Container } from '@mui/system'
-import { Box, Button, CircularProgress, Divider, Grid, Stack, Typography, Rating, Avatar } from '@mui/material'
+import { Box, Button, CircularProgress, Divider, Grid, Typography, Rating, Avatar } from '@mui/material'
 import CreateReview from '../components/CreateReview'
+import {useDispatch, useSelector} from 'react-redux';
+import { getProduct } from '../actions/productActions'
 
 export const Product = ({ShowMessage, userData}) => {
-  const [product, setProduct] = useState()
+  const {product, success, loading }= useSelector((state) => {return state?.productState})
 
-  const getProductData = async () => {
-    const data = await Axios.getProductDataById(location.pathname)
-    console.log(data);
-    !data.message && setProduct(data.product)
-    data.message && ShowMessage({message:data.message, success:data.success, isOpen:true})
-  }
-
+  const dispatch  = useDispatch()
   useEffect(()=>{
-    getProductData()
+    getProduct(dispatch, location.pathname)
   },[])
 
   return (
     <Container className={'mt-10'}>
      {
-      !product 
+     !product
       ?
-        <CircularProgress/>
+        <Box
+          sx={{
+            display:'flex',
+            justifyContent:'center',
+            height:'80vh',
+            alignItems:'center'
+          }}
+        >
+          <CircularProgress/>
+        </Box>
       :
       <div>
         <Box sx={{display:'flex', justifyContent:'center'}} mb={2}>
           <Grid container spacing={2}>
 
             <Grid item xs={12} sm={6} md={6}>
-              <img src={`http://localhost:8080${product.images[0].image}`} alt="product_img" width={"100%"} />
+              <img src={`http://localhost:8080${product?.images[0].image}`} alt="product_img" width={"100%"} />
             </Grid>
 
             <Grid item xs={12} sm={6} md={6}>
@@ -42,7 +46,7 @@ export const Product = ({ShowMessage, userData}) => {
                     color:'text.primary'
                   }}
                 >
-                  {product.name.toUpperCase()}
+                  {product?.name.toUpperCase()}
                 </Typography>
                 <Typography component={'p'}  mb={1}
                   sx={{

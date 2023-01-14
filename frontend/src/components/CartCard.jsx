@@ -7,8 +7,6 @@ import {DelCart} from "./DelCart"
 import Axios from "../config/axios"
 
 export const CartCard = ({products,cart, userData}) => {
-
-
   return (
     <Grid  container spacing={2}>
       {

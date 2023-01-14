@@ -1,26 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const productsSlice = createSlice({
+const productSlice = createSlice({
     name:'products',
     initialState:{
         loading: false
     },
     reducers: {
-        productsRequest(state, action){
+        productRequest(state, action){
             return {
                 loading:true,
             }
         },
-        productsSuccess(state, action){
+        productSuccess(state, action){
             return {
                 loading: false,
-                products: action.payload.products,
-                count: action.payload.count,
+                product: action.payload.product,
                 success: action.payload.success,
-                totalPage: action.payload.totalPage
             }
         },
-        productsFail(state, action){
+        productFail(state, action){
             return {
                 loading: false,
                 error: action.payload
@@ -29,8 +27,8 @@ const productsSlice = createSlice({
     }
 });
 
-const {actions, reducer} = productsSlice;
+const {actions, reducer} = productSlice;
 
-export const {productsFail, productsRequest, productsSuccess} = actions;
+export const {productFail, productRequest, productSuccess} = actions;
 
 export default reducer;

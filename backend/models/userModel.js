@@ -29,6 +29,19 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'user'
     },
+    cart:[
+        {
+            product:{
+                type:mongoose.SchemaTypes.ObjectId,
+                ref:'Product',
+                required:true
+            },
+            quantity:{
+                type:Number,
+                required:true
+            }
+        }
+    ],
     resetPasswordToken: String,
     resetPasswordTokenExpire: Date,
     createdAt:{
