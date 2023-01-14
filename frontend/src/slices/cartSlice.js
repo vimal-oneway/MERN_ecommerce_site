@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const productSlice = createSlice({
-    name:'product',
+const cartSlice = createSlice({
+    name:'cart',
     initialState:{
         loading: false
     },
     reducers: {
-        productRequest(state, action){
+        cartRequest(state, action){
             return {
                 loading:true,
             }
         },
-        productSuccess(state, action){
+        cartSuccess(state, action){
             return {
                 loading: false,
                 product: action.payload.product,
                 success: action.payload.success,
             }
         },
-        productFail(state, action){
+        cartFail(state, action){
             return {
                 loading: false,
                 error: action.payload
