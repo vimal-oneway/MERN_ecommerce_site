@@ -13,4 +13,4 @@ export const getProducts = async (dispatch,priceQuery, page) =>
     {
         dispatch(productsFail(error.response.data));
     }
-}
+}  

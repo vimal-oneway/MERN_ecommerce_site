@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Axios from '../config/axios'
 import { Container } from '@mui/system'
 import { Box, Button, CircularProgress, Divider, Grid, Stack, Typography, Rating, Avatar } from '@mui/material'
+import CreateReview from '../components/CreateReview'
 
-export const Product = ({ShowMessage}) => {
+export const Product = ({ShowMessage, userData}) => {
   const [product, setProduct] = useState()
 
   const getProductData = async () => {
@@ -160,44 +161,7 @@ export const Product = ({ShowMessage}) => {
                 )
               })
             }
-           <Grid item xs={12} sm={6} md={4} key={"create-review"}
-              sx={{
-                border:'2px #dee2e6 solid',
-                borderRadius:'12px',
-                padding:'12px',
-                width:'100%',
-                margin:'6px'
-              }}
-            >
-              <Box mb={1} sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                <Box  sx={{display:'flex',alignItems:'center'}}>
-                  <Avatar sx={{ width: 32, height: 32 }}>w</Avatar> 
-                  <Typography ml={1}
-                    sx={{
-                      fontFamily:'rubik',
-                      fontWeight:'400',
-                      color:'text.primary',
-                      fontSize:'1.2rem'
-                    }}
-                  >your name</Typography>
-                </Box>
-                <Box>
-                  <Rating name="product-rating"  />
-                </Box>
-              </Box>
-
-              <Divider/>
-              <Box mb={2}>
-                <Typography mt={1}
-                  sx={{
-                    fontFamily:'karla',
-                    fontWeight:'500',
-                    color:'text.secondary'
-                  }}
-                >enter your comment</Typography>
-              </Box>
-              <Button variant='outlined'>Create review</Button>
-            </Grid>
+            <CreateReview reviews={product?.reviews} userData={userData}/>
           </Grid>
         </Container>
       </div>
