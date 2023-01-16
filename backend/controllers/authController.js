@@ -4,6 +4,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwt");
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
+const path = require("path");
 
 // * api/v1/register
 exports.registerUser = catchAsyncError(async(req, res, next) => {
@@ -179,6 +180,14 @@ exports.getUserCart = catchAsyncError(async(req, res, next) => {
 exports.addToCart = catchAsyncError(async(req, res, next) => {
     const {productId, quantity} = req.body;
     const user =  await User.findById(req.user._id);
+    
+    const isExist = user.cart.find(obj => obj.product.toString() === productId);
+    if(isExist)
+    {
+        res.status(400).json({success:false, message:'this product is already in your cart'});
+        return;
+    }
+
     user.cart.push({product:productId, quantity:quantity||1});
     user.save();
     res.status(200).json({user, success:true, message:'Product was added successfully'});
@@ -258,3 +267,10 @@ exports.deleteUser = catchAsyncError(async(req, res, next) => {
     res.status(200).json({success:true})
 })
 
+const getTotalPrice = (cart) => {
+    let total;
+    cart.forEach((obj)=> {
+        total += obj.price;
+    })
+    return total;
+}
