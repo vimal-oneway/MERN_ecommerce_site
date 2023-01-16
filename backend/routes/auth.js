@@ -16,7 +16,8 @@ const
         deleteUser,
         getUserCart,
         addToCart,
-        deleteCart
+        deleteCart,
+        setQuantityCart
     } = require('../controllers/authController');
 
 const { isAuthenticatedUser,authorizeRoles } = require('../middlewares/authenticate')
@@ -39,7 +40,8 @@ router
     .route('/cart')
     .get(isAuthenticatedUser, getUserCart)
     .put(isAuthenticatedUser, addToCart)
-    .delete(isAuthenticatedUser, deleteCart);
+    .delete(isAuthenticatedUser, deleteCart)
+    .post(isAuthenticatedUser, setQuantityCart);
 
 // * admin routes
 router.route('/admin/users').get( isAuthenticatedUser, authorizeRoles('admin'), getAllUsers );

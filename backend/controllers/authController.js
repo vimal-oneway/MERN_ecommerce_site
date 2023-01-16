@@ -193,6 +193,21 @@ exports.deleteCart = catchAsyncError(async (req, res, next) => {
     res.status(200).json({user})
 })
 
+// * change quantity 
+exports.setQuantityCart = catchAsyncError(async (req, res, next) => {
+    const {productId, quantity} = req.body;
+    const user =  await User.findById(req.user._id);
+    user.cart.forEach(obj => {
+        if(obj.product.toString() == productId)
+        {
+            obj.quantity = quantity;
+        }
+    }); 
+    await user.save();
+    res.json({user})
+})
+
+
 // * Admin: Get All users 
 exports.getAllUsers = catchAsyncError(async(req, res, next) => {
     const users = await User.find();
