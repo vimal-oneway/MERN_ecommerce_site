@@ -4,6 +4,7 @@ import { Box, Button, CircularProgress, Divider, Grid, Typography, Rating, Avata
 import CreateReview from '../components/CreateReview'
 import {useDispatch, useSelector} from 'react-redux';
 import { getProduct } from '../actions/productActions'
+import { addToCart } from '../actions/addToCart';
 
 export const Product = ({ShowMessage, userData}) => {
   const {product, success, loading }= useSelector((state) => {return state?.productState})
@@ -102,7 +103,7 @@ export const Product = ({ShowMessage, userData}) => {
                 <Divider/>
 
                 <Box mt={2}>
-                  <Button variant='outlined' sx={{margin:'0 12px 0 0'}}>{"add to cart"}</Button>{" "}
+                  <Button variant='outlined' onClick={() => {addToCart(dispatch, product._id)}} sx={{margin:'0 12px 0 0'}}>{"add to cart"}</Button>{" "}
                   <Button variant='contained'>{"buy now"}</Button>
                 </Box>
             </Grid>

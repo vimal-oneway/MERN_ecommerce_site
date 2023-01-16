@@ -1,13 +1,15 @@
 import React from 'react'
-import { Card, CardActionArea, Button,Typography,CardActions,Rating, Grid, Divider } from '@mui/material'
+import { Card, CardActionArea, Button,Typography,CardActions,Rating, Grid, Divider, Box } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Axios from '../config/axios'
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/system';
+import { addToCart } from '../actions/addToCart';
+import {useDispatch} from 'react-redux'
 
 export default function ProductCard({userData,products}) {
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Grid  container spacing={2}>
       {
@@ -43,7 +45,7 @@ export default function ProductCard({userData,products}) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary" variant='outlined' onClick={(e)=>{Axios.addToCart(userData._id, product._id);}}>
+                  <Button size="small" color="primary" variant='outlined' onClick={(e)=>{addToCart(dispatch, product._id)}}>
                     cart
                   </Button>
                   <Button size="small" variant='contained' color="primary">

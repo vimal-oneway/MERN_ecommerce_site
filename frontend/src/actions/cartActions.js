@@ -30,7 +30,6 @@ export const setQuantity = async (dispatch, quantity, productId) =>
 export const deleteProduct = async (dispatch, productId) => 
 {
     try {
-        console.log(productId, 'deleteProduct');
         dispatch(cartRequest());
         const {data} = await axios.delete(`/api/v1/cart`, {data:{
             productId

@@ -35,12 +35,17 @@ const cartSlice = createSlice({
                 loading:false,
                 cart:action.payload
             }
+        },
+        cartAdd(state, action){
+            return{
+                loading:false
+            }
         }
     }
 });
 
 const { actions, reducer } = cartSlice;
 
-export const { cartFail, cartSuccess, cartRequest, cartDelete, cartQuantity } = actions;
+export const { cartFail, cartSuccess, cartRequest, cartDelete, cartQuantity, cartAdd } = actions;
 
 export default reducer;

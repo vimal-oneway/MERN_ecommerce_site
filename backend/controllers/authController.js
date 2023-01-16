@@ -179,9 +179,8 @@ exports.getUserCart = catchAsyncError(async(req, res, next) => {
 
 // * add to cart 
 exports.addToCart = catchAsyncError(async(req, res, next) => {
-    const {productId, quantity} = req.body;
+    const {productId} = req.body;
     const user =  await User.findById(req.user._id);
-
     const isExist = user.cart.find(obj => obj.product.toString() === productId);
     if(isExist)
     {
@@ -189,7 +188,7 @@ exports.addToCart = catchAsyncError(async(req, res, next) => {
         return;
     }
 
-    user.cart.push({product:productId, quantity:quantity||1});
+    user.cart.push({product:productId, quantity:1});
     user.save();
     res.status(200).json({user, success:true, message:'Product was added successfully'});
 })
