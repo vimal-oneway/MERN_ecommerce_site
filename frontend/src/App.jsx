@@ -78,7 +78,7 @@ function App() {
           </Routes>
          <Messager msg={showMessage}/>
          <CommonDrawer options={showDrawer}/>
-        {location.pathname != '/login' && location.pathname != '/register' &&  <Footer/>}
+        {location.pathname != '/login' && location.pathname !='/logout' && location.pathname != '/register' &&  <Footer/>}
       </BrowserRouter>
     </ThemeProvider>
   );

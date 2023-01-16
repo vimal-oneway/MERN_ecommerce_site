@@ -1,23 +1,26 @@
 import { Container } from '@mui/system'
 import React,{useEffect, useState} from 'react'
-import Axios from '../config/axios'
 import { CartCard } from '../components/CartCard'
+import { useDispatch , useSelector } from 'react-redux'
+import { getCart } from '../actions/cartActions'
+
 export const Cart = ({userData}) => {
+    let dispatch = useDispatch();
+    const { cart, loading } = useSelector( state => { return state?.cartState });
+    // const [cart, setCart] = useState()
 
-    const [cart, setCart] = useState()
-
-    const getCart = async() => {
-        setCart(await Axios.getCart(userData.userId))
-    }
+    // const getCart = async() => {
+    //     setCart(await Axios.getCart(userData.userId))
+    // }
+    console.log(cart,"cart");
 
     useEffect(()=>{
-        getCart()
-    })
-
+        getCart(dispatch);
+    },[])
     return (
         <div className='mt'>
             <Container>
-                <CartCard products={cart?.cartData} cart={cart?.cart} userData={userData}/>
+                <CartCard cart={cart}/>
             </Container>
         </div>
     )

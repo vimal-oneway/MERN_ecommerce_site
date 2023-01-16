@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Box, Button, Typography, Modal } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Axios from "../config/axios"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteProduct } from '../actions/cartActions';
+import { useDispatch } from 'react-redux';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -15,20 +16,21 @@ const style = {
   p: 4,
 };
 
-export const DelCart = ({userId, productId}) => {
+export const DelCart = ({productId}) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleClick =async (event) =>{
-    await Axios.delCart(userId, productId);
-    window.location.reload()
+    console.log(productId,"id");
+    await deleteProduct(dispatch, productId);
   } 
 
   return (
-    <div>
-      <Button variant='outline' onClick={handleOpen}><DeleteIcon/></Button>
+    <Box sx={{marginTop:"-2.5px"}} >
+      <Button variant='contained' onClick={handleOpen}><DeleteIcon/></Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -36,19 +38,28 @@ export const DelCart = ({userId, productId}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            delete product from your cart
+          <Typography id="modal-modal-title"  component="h4" 
+            sx={{
+              fontFamily:'rubik',
+              fontWeight:'600',
+              fontSize:'1.5rem'
+            }}
+          >
+            Delete product
           </Typography>
-          <div className="mb-3"></div>
-          <Typography id="modal-modal-description" variant="p" component="p">
+          <Typography id="modal-modal-description" component="p" mb={1}
+            sx={{
+              fontFamily:'karla',
+              color:'text.secondary',
+              fontWeight:'500',
+            }}
+          >
             Confirm to delete
           </Typography>
-          <div className="mb-3"></div>
-          <Button variant='contained' color='secondary' onClick={()=>{setOpen(false)}} >cancel</Button> {" "}
-          <Button variant='contained' onClick={(e)=>{handleClick(e)}}>confirm</Button>
-          <div className="mb"></div>
+          <Button variant='outlined' sx={{marginRight:'12px'}} onClick={()=>{setOpen(false)}} >cancel</Button>
+          <Button variant='contained' onClick={(e)=>{handleClick(e)}}>Delete</Button>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }

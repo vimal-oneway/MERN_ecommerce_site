@@ -5,6 +5,7 @@ const sendToken = require("../utils/jwt");
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
 const path = require("path");
+const { model } = require("mongoose");
 
 // * api/v1/register
 exports.registerUser = catchAsyncError(async(req, res, next) => {
@@ -180,7 +181,7 @@ exports.getUserCart = catchAsyncError(async(req, res, next) => {
 exports.addToCart = catchAsyncError(async(req, res, next) => {
     const {productId, quantity} = req.body;
     const user =  await User.findById(req.user._id);
-    
+
     const isExist = user.cart.find(obj => obj.product.toString() === productId);
     if(isExist)
     {
@@ -196,24 +197,24 @@ exports.addToCart = catchAsyncError(async(req, res, next) => {
 // * delete product in cart
 exports.deleteCart = catchAsyncError(async (req, res, next) => {
     const {productId} = req.body;
-    const user = await User.findById(req.user._id).select('cart');
-    user.cart = user.cart.filter(obj => obj.product.toString() !== productId);
+    const user = await User.findById(req.user._id).populate({path:'cart.product', model:'Product', select:"name price description ratings images seller numOfReviews"});
+    user.cart = user.cart.filter(obj => obj.product._id.toString() !== productId);
     await user.save()
-    res.status(200).json({user})
+    res.status(200).json({cart:user.cart})
 })
 
 // * change quantity 
 exports.setQuantityCart = catchAsyncError(async (req, res, next) => {
     const {productId, quantity} = req.body;
-    const user =  await User.findById(req.user._id);
+    const user =  await User.findById(req.user._id).populate({path:'cart.product', model:'Product', select:"name price description ratings images seller numOfReviews"});
     user.cart.forEach(obj => {
-        if(obj.product.toString() == productId)
+        if(obj.product._id.toString() == productId)
         {
             obj.quantity = quantity;
         }
     }); 
     await user.save();
-    res.json({user})
+    res.json({cart:user.cart})
 })
 
 

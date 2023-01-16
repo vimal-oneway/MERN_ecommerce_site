@@ -1,33 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
-    name:'cart',
-    initialState:{
+    name: 'cart',
+    initialState: {
         loading: false
     },
     reducers: {
-        cartRequest(state, action){
+        cartRequest(state, action) {
             return {
-                loading:true,
+                loading: true,
             }
         },
-        cartSuccess(state, action){
+        cartSuccess(state, action) {
             return {
+                ...state,
                 loading: false,
-                cart: action.payload,
+                cart: action.payload.data,
             }
         },
-        cartFail(state, action){
+        cartFail(state, action) {
             return {
                 loading: false,
                 error: action.payload
+            }
+        },
+        cartDelete(state, action) {
+            return {
+                loading:false,
+                cart:action.payload
+            }
+        },
+        cartQuantity(state, action){
+            return{
+                loading:false,
+                cart:action.payload
             }
         }
     }
 });
 
-const {actions, reducer} = productSlice; 
+const { actions, reducer } = cartSlice;
 
-export const {productFail, productRequest, productSuccess} = actions;
+export const { cartFail, cartSuccess, cartRequest, cartDelete, cartQuantity } = actions;
 
 export default reducer;
