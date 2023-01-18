@@ -2,9 +2,7 @@ import React from 'react'
 import { Card, CardActionArea, Button,Typography,CardActions,Rating, Grid, Divider, Box } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import Axios from '../config/axios'
 import { useNavigate } from 'react-router-dom';
-import { addToCart } from '../actions/addToCart';
 import {useDispatch} from 'react-redux'
 
 export default function ProductCard({userData,products}) {
@@ -44,14 +42,6 @@ export default function ProductCard({userData,products}) {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary" variant='outlined' onClick={(e)=>{addToCart(dispatch, product._id)}}>
-                    cart
-                  </Button>
-                  <Button size="small" variant='contained' color="primary">
-                    buy now
-                  </Button>
-                </CardActions>
               </Card>
             </Grid>
           )

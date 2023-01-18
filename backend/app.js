@@ -22,6 +22,6 @@ app.use('/api/v1/', products);
 app.use('/api/v1/', auth);
 app.use('/api/v1/',order);
 
-app.use(errorMiddleware)
+app.use(errorMiddleware);
 
 module.exports=app;

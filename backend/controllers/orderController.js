@@ -1,7 +1,10 @@
 const catchAsyncError = require('../middlewares/catchAsyncError')
 const Order = require('../models/orderModel');
 const ErrorHandler = require('../utils/errorHandler');
-const Product = require('../models/productModel')
+const Product = require('../models/productModel');
+const stripe = require('stripe')("sk_test_51MR6qYSJ0awuaLMldPSxcG0P3ko73G4eHmNk5TMsEWmvMdUjWeIFja4OYFM6BcZoqjdwpW4xxRae6FHbWJsgxANq00W2xpsD5v")
+
+
 // * Create new order - api/v1/order/new
 exports.newOrder = catchAsyncError(async(req, res, next) => {
     const {
@@ -106,3 +109,66 @@ exports.deleteOrder = catchAsyncError(async(req,res, next) => {
 
     res.status(200).json({success:true});
 })
+
+// * payment 
+exports.setPayment = catchAsyncError(async (req, res, next) => {
+    const {product} = req.body
+    stripe.customers.create({
+        name: req.user.name,
+        email: req.user.email,
+        source: req.body.token.id
+    }).then(customer => stripe.charges.create({
+        amount: parseInt(product.price) * 100,
+        currency: 'usd',
+        customer: customer.id,
+        description: 'Thank you for your generous donation.'
+    })).then(() => res.render('complete.html'))
+        .catch(err => console.log(err))
+})
+
+
+const YOUR_DOMAIN = 'http://localhost:5173'
+
+// exports.setPayment = catchAsyncError(async (req, res, next) => {
+//     const {product} = req.body;
+//     console.log(product);
+
+//     let stripeProduct = await stripe.products.list({
+//         limit:1,
+//         active:true,
+        
+//     });
+//     console.log(stripeProduct);
+
+//     stripeProduct = stripeProduct.data[0];
+//     console.log(stripeProduct);
+
+//     if(!stripeProduct)
+//     {
+//         stripeProduct = await stripe.products.create({
+//             name:product.name,
+//             type:'service',
+//         });
+//     }
+
+//     console.log(stripeProduct);
+//     const price = await stripe.prices.create({
+//         unit_amount: parseFloat(product.price),
+//         currency:'inr',
+//         product: product._id
+//     })
+//     const session = await stripe.checkout.sessions.create({
+//         line_items: [
+//           {
+//             price: price,
+//             quantity: 1,
+//           },
+//         ],
+//         mode: 'payment',
+//         success_url: `${YOUR_DOMAIN}?success=true`,
+//         cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+//     }).then(r=>console.log(r)).catch(e => console.log(e));
+//     console.log(session.url);
+//     res.redirect(302, session.url);
+//     //   res.redirect(303, session.url);
+// })

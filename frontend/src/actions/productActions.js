@@ -7,7 +7,6 @@ export const getProduct = async (dispatch, path) =>
     {
         dispatch(productRequest());
         const {data}  = await axios.get(`/api/v1/${path}`);
-        console.log("hi", path);
         dispatch(productSuccess(data));
     } 
     catch (error) 

@@ -15,10 +15,11 @@ import {
 import {DelCart} from "./DelCart";
 import {useDispatch} from 'react-redux'
 import {setQuantity} from '../actions/cartActions'
-import Axios from "../config/axios"
+import {useNavigate} from 'react-router-dom'
 
 export const CartCard = ({cart}) => {
-  const dispatch = useDispatch()
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <Grid  container spacing={2}>
       {
@@ -27,8 +28,8 @@ export const CartCard = ({cart}) => {
           return( 
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                    <CardMedia
+                <CardActionArea onClick={() => {navigate(`/product/${cart.product._id}`)}}>
+                    <CardMedia 
                         component="img"
                         width="140"
                         image={`http://localhost:8080${cart.product.images[0].image}`}

@@ -7,7 +7,8 @@ const {
     getUserOrders, 
     orders, 
     updateOrder, 
-    deleteOrder 
+    deleteOrder, 
+    setPayment
 } = require('../controllers/orderController');
 
 router
@@ -32,5 +33,8 @@ router
     .put(isAuthenticatedUser, authorizeRoles('admin'), updateOrder)
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder);
 
+router
+    .route('/payment')
+    .post(isAuthenticatedUser, setPayment);
 
 module.exports = router;

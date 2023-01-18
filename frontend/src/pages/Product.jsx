@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react'
-import { Container } from '@mui/system'
-import { Box, Button, CircularProgress, Divider, Grid, Typography, Rating, Avatar } from '@mui/material'
+import {Container, Box, Button, CircularProgress, Divider, Grid, Typography, Rating, Avatar } from '@mui/material';
+
+import StripeCheckout from 'react-stripe-checkout';
+
 import CreateReview from '../components/CreateReview'
+
 import {useDispatch, useSelector} from 'react-redux';
-import { getProduct } from '../actions/productActions'
+import { getProduct } from '../actions/productActions';
 import { addToCart } from '../actions/addToCart';
+import axios from 'axios';
+
+
+
 
 export const Product = ({ShowMessage, userData}) => {
   const {product, success, loading }= useSelector((state) => {return state?.productState})
@@ -14,6 +21,16 @@ export const Product = ({ShowMessage, userData}) => {
     getProduct(dispatch, location.pathname)
   },[])
 
+  const onToken = async (token) => {
+    console.log(token);
+    const res = await axios.post('/api/v1/payment', {token, product});
+    console.log(res);
+  }
+
+  const handleClick = async () => {
+    const res = await axios.post('/api/v1/payment', { product});
+    console.log(res);
+  }
   return (
     <Container className={'mt-10'}>
      {
@@ -104,7 +121,17 @@ export const Product = ({ShowMessage, userData}) => {
 
                 <Box mt={2}>
                   <Button variant='outlined' onClick={() => {addToCart(dispatch, product._id)}} sx={{margin:'0 12px 0 0'}}>{"add to cart"}</Button>{" "}
-                  <Button variant='contained'>{"buy now"}</Button>
+                  <StripeCheckout
+                    stripeKey="pk_test_51MR6qYSJ0awuaLMlk9C728iFQn3Mm3IZdMA8SK15R0394H38P8OQwGdbEGgKfdrdFzhoq3qs6iIU2jvAkGOIk5CV00MgbMqm9o"
+                    name={product.name}
+                    amount={product.price*100}
+                    currency='INR'
+                    token={onToken}
+                    // shippingAddress
+                    // billingAddress={false}
+                  >
+                    <Button variant='contained' onClick={handleClick}>{"buy now"}</Button>
+                  </StripeCheckout>
                 </Box>
             </Grid>
           </Grid>
