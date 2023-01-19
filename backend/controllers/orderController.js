@@ -112,22 +112,38 @@ exports.deleteOrder = catchAsyncError(async(req,res, next) => {
 
 // * payment 
 exports.setPayment = catchAsyncError(async (req, res, next) => {
-    const {product} = req.body
-    stripe.customers.create({
-        name: req.user.name,
-        email: req.user.email,
-        source: req.body.token.id
-    }).then(customer => stripe.charges.create({
-        amount: parseInt(product.price) * 100,
+    console.log(req.body.product, req.body.token);
+    const {product, token} = req.body
+    try {
+      let {status} = await stripe.charges.create({
+        amount: parseFloat(product.price),
         currency: 'usd',
-        customer: customer.id,
-        description: 'Thank you for your generous donation.'
-    })).then(() => res.render('complete.html'))
-        .catch(err => console.log(err))
-})
+        source: token?.id,
+      });   
+      console.log("status/n", status);
+      res.json({status});
+    } catch (err) {
+      res.status(500).end();
+    }
+});
+  
 
+//     const {product} = req.body
+//     stripe.customers.create({
+//         name: req.user.name,
+//         email: req.user.email,
+//         source: req.body.token.id
+//     }).then(customer => stripe.charges.create({
+//         amount: parseInt(product.price) * 100,
+//         currency: 'usd',
+//         customer: customer.id,
+//         description: 'Thank you for your generous donation.'
+//     })).then((res) => console.log(res))
+//         .catch(err => console.log(err))
+// })
 
-const YOUR_DOMAIN = 'http://localhost:5173'
+// app.post('/charge', async (req, res) => {
+// const YOUR_DOMAIN = 'http://localhost:5173'
 
 // exports.setPayment = catchAsyncError(async (req, res, next) => {
 //     const {product} = req.body;
