@@ -8,7 +8,7 @@
     "start": "npx nodemon backend/server.js",
     "dev": "concurrently --kill-others \"set NODE_ENV=development&& npx nodemon backend/server.js\"  \"cd frontend && npm start\"",
     "vite": "cd frontend && vite",
-    "prod": "concurrently --kill-others \"set NODE_ENV=production&& npx nodemon backend/server.js\"  \"cd frontend && npm start\"",
+    "prod": "concurrently --kill-others \"set NODE_ENV=production&& npx nodemon backend/server.js\"  \"cd frontend && npm vite\"",
     "seeder": "node backend/utils/seeder.js",
     "build": "npm i && cd frontend && npm i",
     "preview": "vite preview"
