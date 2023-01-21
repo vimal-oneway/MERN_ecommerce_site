@@ -7,7 +7,7 @@ const cors = require('cors')
 
 app.use(cors({
     methods:['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-    origin:"https://letscode-f938.onrender.com",
+    origin:process.env.CLI_URL,
     credentials:true
 }));
 
