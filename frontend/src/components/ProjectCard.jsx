@@ -7,8 +7,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Divider, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ProjectCard({ projectData }) {
+  let navigate = useNavigate();
   return (
     <Grid container spacing={2} >
       {projectData?.map((project, index) => {
@@ -17,7 +20,7 @@ export default function ProjectCard({ projectData }) {
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 sx={{ height: "250px" }}
-                image={demoImg}
+                image={project.imgSrc}
                 title="green iguana"
               />
               <CardContent>
@@ -40,7 +43,9 @@ export default function ProjectCard({ projectData }) {
               <CardActions>
                 <Button size="small" sx={{
                   fontFamily:'karla'
-                }} variant="outlined">Learn More</Button>
+                }} variant="outlined"
+                  onClick={()=>{window.location.href = project.url;}}
+                >Learn More</Button>
               </CardActions>
             </Card>
           </Grid>

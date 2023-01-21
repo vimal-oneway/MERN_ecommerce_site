@@ -3,6 +3,9 @@ import {Container, Grid, Box, Typography, Button} from '@mui/material';
 import homePage from '../assets/gif/homePage.gif'
 import TeamCard from '../components/TeamCart'
 import ProjectCard from '../components/ProjectCard';
+import blogImg from '../assets/img/blog.png'
+import movieImg from '../assets/img/movie.png'
+import humanFollowingImg from '../assets/img/humanFollowing.jpg'
 const teamData = [
   {
     name:'Vimal Raj',
@@ -33,15 +36,21 @@ const teamData = [
 const projectData = [
   {
     name:'Blog site',
-    desc:'This is a static site with good ui and ux design.'
+    desc:'This is a static site with good ui and ux design.',
+    imgSrc: blogImg,
+    url:'https://webie.me/Blogr/'
   },
   {
     name:'Movie search site',
-    desc:'This site will search a movie using movie mash api and display the results'
+    desc:'This site will search a movie using movie mash api and display the results',
+    imgSrc: movieImg,
+    url:'https://webie.me/tv-show-seacrh-api/'
   },
   {
-    name:'Line following robot',
-    desc:`It'll follow human being like a pet. This project was so funny and by doing this project you will gain knowledge about arduino intergation with sensors, motor driver and motor etc.,.`
+    name:'Human following robot',
+    desc:`It'll follow human being like a pet. This project was so funny and by doing this project you will gain knowledge about arduino intergation with sensors, motor driver and motor etc.,.`,
+    imgSrc: humanFollowingImg,
+    url:'http://localhost:5173/products'
   }
 ]
 

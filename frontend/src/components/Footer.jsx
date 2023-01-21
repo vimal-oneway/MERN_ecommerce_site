@@ -6,14 +6,18 @@ import { Link } from 'react-router-dom';
 import { SocialIcon } from 'react-social-icons';
 function Footer() {
   return (
-    <div className='footer mb-3'>
-      <Container>
-        <Grid container spacing={2} sx={{padding:'24px 0 24px 0'}}>
-          <Grid item md={4} 
+    <div className='footer'>
+      <Container sx={{
+        paddingTop:'2rem',
+        paddingBottom:'2rem'
+      }} >
+        <Grid container spacing={2}  mt={2} mb={3}  ml={0} sx={{width:'100%', margin:"auto", display:'flex', justifyContent:'center'}}>
+          <Grid item xs={12} sm={8} md={4} 
             sx={{
               backgroundColor:'#fcf8fa',
-              padding:'12px',
-              borderRadius:'8px'
+              padding:' 12px',
+              marginTop:' 24px',
+              borderRadius:'8px',
               }} 
           >
             <Typography component={'h4'} mb={1}
@@ -25,26 +29,29 @@ function Footer() {
                 fontSize:'1.2rem'
               }}
             >Subscribe for future updates</Typography>
-            <Box mb={1}
-              sx={{
-                display:'flex',
-                justifyContent:'space-evenly',
-              }}
-            >
-              <TextField id="outlined-basic" color='primary'  label="Email" variant="outlined" />
-              <Button variant='contained'>Subscribe</Button>
-            </Box>
+            <Grid container mb={1} spacing={1}>
+              <Grid item sm={6} xs={12} md={6}>
+                <TextField id="outlined-basic" color='primary' label="Email" variant="outlined" />
+              </Grid>
+              <Grid item sm={6} xs={12} md={6}
+                sx={{
+                  display:'flex'
+                }}
+              >
+                <Button variant='contained'>Subscribe</Button>
+              </Grid>
+            </Grid>
           </Grid>
 
-          <Grid item md={4} 
-            sx={{
-              display:'flex',
-              justifyContent:'flex-start',
-              alignItems:'center',
-              flexDirection:'column'
-            }}
-          >
-            <Box>
+          <Grid item md={4} xs={12} sm={6}>
+            <Box
+                    sx={{
+                      display:'flex',
+                      justifyContent:'center',
+                      flexDirection:'column',
+                      alignItems:'center'
+                    }}
+            >
               <Typography
                 sx={{ 
                   fontFamily:'rubik',
@@ -100,8 +107,15 @@ function Footer() {
             </Box>
           </Grid>
 
-          <Grid item md={4} >
-          <Box>
+          <Grid item md={4} xs={12} sm={6} >
+          <Box 
+              sx={{
+                display:'flex',
+                justifyContent:'center',
+                flexDirection:'column',
+                alignItems:'center'
+              }}
+          >
               <Typography
                 sx={{ 
                   fontFamily:'rubik',
@@ -136,7 +150,7 @@ function Footer() {
           </Grid>
         </Grid>
       </Container>
-      <Divider sx={{backgroundColor:'#f68303'}}  />
+      <Divider sx={{backgroundColor:'#f68303'}}   />
       <Container>
         <Typography mt={2} 
           sx={{
@@ -171,5 +185,4 @@ function Footer() {
     </div>
   )
 }
-// 
 export default Footer
