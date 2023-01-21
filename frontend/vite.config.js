@@ -8,9 +8,8 @@ export default defineConfig({
   server:{
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://unrivaled-dragon-e0c58f.netlify.app:8080',
         changeOrigin: true,
-        secure:true
       }
     }
   }
