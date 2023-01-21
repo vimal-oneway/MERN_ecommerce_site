@@ -5,14 +5,7 @@ import {
     Box
   } from "@mui/material";
 import cardImg from '../assets/img/vimal.jpg'
-
-import GitHubIcon from '@mui/icons-material/GitHub';
-import EmailIcon from '@mui/icons-material/Email';
-import {Link, useNavigate} from 'react-router-dom';
-
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faInstagram, } from '@fortawesome/free-brands-svg-icons'
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import { useNavigate} from 'react-router-dom';
 
 import {SocialIcon} from 'react-social-icons'
 
