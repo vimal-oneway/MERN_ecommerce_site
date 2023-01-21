@@ -5,7 +5,6 @@ const sendToken = require("../utils/jwt");
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
 const path = require("path");
-const { model } = require("mongoose");
 
 // * api/v1/register
 exports.registerUser = catchAsyncError(async(req, res, next) => {
