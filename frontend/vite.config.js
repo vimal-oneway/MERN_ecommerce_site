@@ -8,7 +8,7 @@ export default defineConfig({
   server:{
     proxy: {
       '/api': {
-        target: 'https://letscode-f938.onrender.com:8080',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       }
     }
